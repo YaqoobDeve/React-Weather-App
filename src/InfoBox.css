@@ -1,0 +1,160 @@
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #0ea5e9 0%, transparent 55%),
+    radial-gradient(1200px 600px at 120% 110%, #6366f1 0%, transparent 55%),
+    #0a0f1c;
+  color: #e6edf3;
+}
+
+:root {
+  --card-bg: #0b1220;           /* dark navy for contrast */
+  --card-elev: rgba(2, 6, 23, 0.55);
+  --border: rgba(148, 163, 184, 0.14);
+  --text: #e6edf3;              /* primary text */
+  --muted: #9fb3c8;             /* secondary text */
+  --accent: #60a5fa;            /* blue accent */
+  --accent-2: #a78bfa;          /* purple accent */
+  --chip-bg: rgba(96, 165, 250, 0.12);
+}
+
+.WeatherCard {
+  width: 100%;
+  max-width: 420px;
+  margin: 48px auto;
+  padding: 24px;
+  position: relative;
+  border-radius: 18px;
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow:
+    0 20px 40px var(--card-elev),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.WeatherCard::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(96,165,250,.45), rgba(167,139,250,.35));
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Header: City + Weather chip */
+.City {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: #f8fafc;
+  text-align: center;
+}x
+
+.Weather {
+  margin: 8px auto 16px;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-transform: capitalize;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+/* Main temperature */
+.Temp {
+  margin: 4px 0 6px;
+  text-align: center;
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #b4c6ff;
+  text-shadow: 0 6px 24px rgba(99, 102, 241, 0.25);
+  font-feature-settings: "tnum" 1;
+}
+
+/* Feels like */
+.feelsLike {
+  text-align: center;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Divider */
+.WeatherCard::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin: 6px 0 18px;
+  background: linear-gradient(90deg, transparent, rgba(148,163,184,0.25), transparent);
+}
+
+/* Stats grid */
+.box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.box-item {
+  background: #0f1a2e;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(2, 6, 23, 0.35);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.box-item:hover {
+  transform: translateY(-2px);
+  background: #122140;
+  box-shadow: 0 12px 26px rgba(2, 6, 23, 0.45);
+}
+
+.head {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #e2e8f0;
+}
+
+.box-item p:last-child {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+/* Responsiveness */
+@media (max-width: 480px) {
+  .WeatherCard {
+    margin: 28px 16px;
+    padding: 20px;
+  }
+  .Temp { font-size: 52px; }
+  .box { gap: 10px; }
+}
+
+/* Motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .box-item,
+  .WeatherCard { transition: none; }
+}
